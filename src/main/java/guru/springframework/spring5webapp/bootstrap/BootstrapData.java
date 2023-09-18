@@ -9,10 +9,11 @@ import org.springframework.stereotype.*;
 public class BootstrapData implements CommandLineRunner {
     private final AuthorRepository authorRepository;
     private final BookRepository bookRepository;
-
-    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository) {
+    private final PublisherRepository publisherRepository;
+    public BootstrapData(AuthorRepository authorRepository, BookRepository bookRepository, PublisherRepository publisherRepository) {
         this.authorRepository = authorRepository;
         this.bookRepository = bookRepository;
+        this.publisherRepository = publisherRepository;
     }
 
     @Override
@@ -43,8 +44,17 @@ public class BootstrapData implements CommandLineRunner {
         ericSaved.getBooks().add(dddSaved);
         rodSaved.getBooks().add(noEJBSaved);
 
+        Publisher publisher = new Publisher();
+        publisher.setPublisherName("TestPublisher");
+        publisher.setCity("Tashkent");
+        publisher.setAddress("Taskent Darhan");
+        publisher.setZip("Test zip");
+
+        Publisher publisherSaved = publisherRepository.save(publisher);
+
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
         System.out.println("Book Count: " + bookRepository.count());
+        System.out.println("Publisher Count: " + publisherRepository.count());
     }
 }
