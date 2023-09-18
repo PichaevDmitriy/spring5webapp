@@ -1,6 +1,7 @@
 package guru.springframework.spring5webapp.domain;
 
 import javax.persistence.*;
+import java.util.*;
 
 @Entity
 public class Publisher {
@@ -11,7 +12,18 @@ public class Publisher {
     String address;
     String city;
     String state;
-    String zip;
+    String zipCode;
+    @OneToMany(mappedBy = "publisher")
+    private Set<Book > books;
+
+    public Set<Book> getBooks() {
+
+        return books;
+    }
+
+    public void setBooks(Set<Book> books) {
+        this.books = books;
+    }
 
     public Long getId() {
         return id;
@@ -53,12 +65,12 @@ public class Publisher {
         this.state = state;
     }
 
-    public String getZip() {
-        return zip;
+    public String getZipCode() {
+        return zipCode;
     }
 
-    public void setZip(String zip) {
-        this.zip = zip;
+    public void setZipCode(String zip) {
+        this.zipCode = zip;
     }
 
     @Override
