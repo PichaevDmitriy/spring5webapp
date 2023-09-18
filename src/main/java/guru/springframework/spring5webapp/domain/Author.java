@@ -14,7 +14,7 @@ public class Author {
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
-    private Set<Book> books;
+    private Set<Book> books = new HashSet<>();
 
     @Override
     public boolean equals(Object o) {
