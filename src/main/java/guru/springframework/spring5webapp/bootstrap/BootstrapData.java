@@ -22,35 +22,41 @@ public class BootstrapData implements CommandLineRunner {
         eric.setFirstName("Eric");
         eric.setLastName("Events");
 
-        Book ddd = new Book();
-        ddd.setTitle("Domain Driven Design");
-        ddd.setIsbn("123456");
-
-        Author ericSaved = authorRepository.save(eric);
-        Book dddSaved = bookRepository.save(ddd);
-
         Author rod = new Author();
         rod.setFirstName("Rod");
         rod.setLastName("Johnson");
+
+        Author ericSaved = authorRepository.save(eric);
+        Author rodSaved = authorRepository.save(rod);
+
+        Book ddd = new Book();
+        ddd.setTitle("Domain Driven Design");
+        ddd.setIsbn("123456");
 
         Book noEJB = new Book();
         noEJB.setTitle("J2EE Development without EJB");
         noEJB.setIsbn("56789890");
 
-        Author rodSaved = authorRepository.save(rod);
+
         Book noEJBSaved = bookRepository.save(noEJB);
-
-
-        ericSaved.getBooks().add(dddSaved);
-        rodSaved.getBooks().add(noEJBSaved);
+        Book dddSaved = bookRepository.save(ddd);
 
         Publisher publisher = new Publisher();
         publisher.setPublisherName("TestPublisher");
         publisher.setCity("Tashkent");
         publisher.setAddress("Taskent Darhan");
-        publisher.setZip("Test zip");
+        publisher.setZipCode("Test zip");
 
         Publisher publisherSaved = publisherRepository.save(publisher);
+        dddSaved.setPublisher(publisherSaved);
+        noEJBSaved.setPublisher(publisherSaved);
+
+        bookRepository.save(dddSaved);
+        bookRepository.save(noEJBSaved);
+
+
+        ericSaved.getBooks().add(dddSaved);
+        rodSaved.getBooks().add(noEJBSaved);
 
         System.out.println("In Bootstrap");
         System.out.println("Author Count: " + authorRepository.count());
