@@ -18,6 +18,15 @@ public class Book {
 
     @ManyToOne
     private Publisher publisher;
+
+    public Book() {
+    }
+
+    public Book(String title, String isbn) {
+        this.title = title;
+        this.isbn = isbn;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

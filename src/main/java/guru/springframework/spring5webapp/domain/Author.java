@@ -11,6 +11,14 @@ public class Author {
     private String firstName;
     private String lastName;
 
+    public Author() {
+    }
+
+    public Author(String firstName, String lastName) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+    }
+
     @ManyToMany
     @JoinTable(name = "author_book", joinColumns = @JoinColumn(name = "book_id"),
             inverseJoinColumns = @JoinColumn(name = "author_id"))
@@ -28,7 +36,7 @@ public class Author {
 
     @Override
     public int hashCode() {
-        return getId().hashCode();
+        return id != null ? id.hashCode() : 0;
     }
 
     @Override
