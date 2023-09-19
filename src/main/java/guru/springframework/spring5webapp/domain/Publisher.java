@@ -8,16 +8,15 @@ public class Publisher {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     Long id;
-    String publisherName;
+    String name;
     String address;
     String city;
     String state;
     String zipCode;
     @OneToMany(mappedBy = "publisher")
-    private Set<Book > books;
+    private Set<Book > books = new HashSet<>();
 
     public Set<Book> getBooks() {
-
         return books;
     }
 
@@ -33,12 +32,12 @@ public class Publisher {
         this.id = id;
     }
 
-    public String getPublisherName() {
-        return publisherName;
+    public String getName() {
+        return name;
     }
 
-    public void setPublisherName(String publisherName) {
-        this.publisherName = publisherName;
+    public void setName(String publisherName) {
+        this.name = publisherName;
     }
 
     public String getAddress() {
